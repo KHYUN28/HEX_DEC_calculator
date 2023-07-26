@@ -9,6 +9,8 @@
 
 **iPhone_Style_Calculator**
 
+##### 코드 주석과 오류 수정 
+
 ***
 
 ![Capture](https://github.com/KHYUN28/HEX_DEC_calculator/assets/121412134/aaaa6994-3990-440f-a458-822c9d64c84f)
