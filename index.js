@@ -17,27 +17,23 @@ function eraseOnebyOne() {
 }
 
 function calculate() {
-  try {
-    let result = evalBinaryExpression(displayValue);
-    if (result <= 15) {
-      if (isHexMode=true) {
-        displayValue = result.toString(16).toUpperCase();
-      } else {
-        displayValue = formatWithThousandSeparator(result);
-      }
-      document.getElementById("display").value = displayValue;
+  let result = evalBinaryExpression(displayValue);
+  // 이진 표현식을 평가합니다.
+  if (result <= 15) {
+    if (isHexMode=true) {
+      displayValue = result.toString(16).toUpperCase();
     } else {
-      if (isHexMode=false) {
-        displayValue = result.toString(10).toUpperCase();
-      } else {
-        displayValue = formatWithThousandSeparator(result);
-      }
-      document.getElementById("display").value = displayValue;
-    } 
-  } catch (error) {
-    displayValue = "Error";
+      displayValue = formatWithThousandSeparator(result);
+    }
     document.getElementById("display").value = displayValue;
-  }
+  } else {
+    if (isHexMode=false) {
+      displayValue = result.toString(10).toUpperCase();
+    } else {
+      displayValue = formatWithThousandSeparator(result);
+    }
+    document.getElementById("display").value = displayValue;
+  } 
 }
 
 function formatWithThousandSeparator(number) {
@@ -47,7 +43,7 @@ function formatWithThousandSeparator(number) {
 function decimalToHex() {
     const decimalNumber = parseInt(displayValue, 10);
     if (!isNaN(decimalNumber)) {
-      // !isNaN 숫자가 아닌 대상은 true, 숫자면 false를 반환합니다.
+      // !isNaN 숫자가 아닌 대상은 false, 숫자면 true를 반환합니다.
       displayValue = decimalNumber.toString(16).toUpperCase();
       isHexMode = true;
       document.getElementById("display").value = displayValue;
@@ -68,9 +64,9 @@ function hecimalToDec() {
 }
 
 function evalBinaryExpression(expression) {
-  // 16진수 연산을 위해 16진수 숫자와 연산자로 이루어진 문자열을 평가합니다.
+  // 16진수 연산을 위해 16진수 숫자와 연산자로 이루어진 문자열을 변환합니다.
   const binaryExpression = expression.replace(/[0-9A-Fa-f]/g, match => parseInt(match, 16));
-  // 평가된 10진수 표현식을 계산합니다.
+  // 변환된 10진수 표현식을 계산합니다.
   return Function(`"use strict";return (${binaryExpression})`)();
 }
 
